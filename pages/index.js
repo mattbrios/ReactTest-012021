@@ -1,10 +1,11 @@
-import styled from 'styled-components'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import db from '../db.json';
 import QuizBackground from '../src/components/QuizBackground';
 import GitHubCorner from '../src/components/GitHubCorner';
 import Widget from '../src/components/Widget';
 import Footer from '../src/components/Footer';
-// import Footer from '../src/components/Footer';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -18,7 +19,18 @@ export const QuizContainer = styled.div`
 `;
 
 export default function Home() {
-  return( 
+  const router = useRouter();
+  const [name, setName] = useState('');
+
+  const handlerChange = (e) => {
+    setName(e.target.value);
+  };
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/quiz?name${name}`);
+  };
+
+  return (
     <QuizBackground backgroundImage={db.bg}>
       <QuizContainer>
         <Widget>
@@ -27,6 +39,22 @@ export default function Home() {
           </Widget.Header>
           <Widget.Content>
             Entre em contato comigo, terei prazer em atender você!
+            <form onSubmit={handlerSubmit}>
+              <input
+                placeholder="Me diz seu nome"
+                name="name"
+                onChange={handlerChange}
+              />
+              <button
+                type="submit"
+                disabled={name.length === 0}
+              >
+                Bora jogar,
+                {' '}
+                {name}
+                !
+              </button>
+            </form>
           </Widget.Content>
         </Widget>
         <Widget>

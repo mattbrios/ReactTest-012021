@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 // src/components/Footer/index.js
@@ -36,7 +37,11 @@ export default function Footer(props) {
       <a href="https://mateusrios.com.br/">
         <img src="https://mateusrios.com.br/assets/mr.png" alt="Logo Mateus Rios" />
       </a>
-      <p>Mateus Rios<br/><span>Todos os direitos reservados</span></p>
+      <p>
+        Mateus Rios
+        <br />
+        <span>Todos os direitos reservados</span>
+      </p>
     </FooterWrapper>
   );
 }
